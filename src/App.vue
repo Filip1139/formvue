@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <div class="row">
+      <BriefQuestions @inputChange="setInput" />
+      <BriefSummary :answers="answers" />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BriefQuestions from "./components/BriefQuestions";
+import BriefSummary from "./components/BriefSummary";
 
 export default {
-  name: 'App',
+  name: "App",
+  data() {
+    return {
+      answers: {
+        haveSite: { val: "", title: "Strony www" },
+        siteContent: { val: "", title: "Content" },
+        siteRange: { val: "", title: "Zasięg" },
+        haveBlog: { val: "", title: "Blog" }
+      }
+    };
+  },
   components: {
-    HelloWorld
+    BriefQuestions,
+    BriefSummary
+  },
+  methods: {
+    setInput(e) {
+      console.log(e.target.value);
+      this.answers[e.target.name].val = e.target.value;
+    }
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
 </style>
